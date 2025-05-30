@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><project version="4">
+    <component default="true" languageLevel="JDK_21" name="ProjectRootManager" project-jdk-name="jeka-temurin-21" project-jdk-type="JavaSDK" version="2">
+        <output url="file://$PROJECT_DIR$/out"/>
+    </component>
+</project>
