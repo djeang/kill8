@@ -1,9 +1,5 @@
 package app;
 
-import com.github.lalyos.jfiglet.FigletFont;
-import dev.jeka.core.api.utils.JkUtilsSystem;
-import dev.jeka.core.tool.JkDep;
-
 import java.util.Locale;
 
 public class App {
