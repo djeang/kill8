@@ -1,44 +1,38 @@
-#
+# kill8
 
-## JeKa commands
+A cross-platform command-line utility to kill processes running on specific ports. Perfect for developers who need to quickly free up ports during development.
 
-Execute tests
+## What it does
+
+**kill8** finds and terminates processes that are listening on a specified port. I
+t works across different operating systems (macOS, Linux, and Windows) using the appropriate system commands for each platform.
+
+# Install
+
 ```shell
-jeka base: test
+jeka app: install repo=https://github.com/djeang/kill8.git
 ```
 
-Create jar 
+Or install the native version:
 ```shell
-jeka base: pack
+jeka app: install repo=https://github.com/djeang/kill8.git native:
 ```
 
-Run jar
+## Usage
+
+### Basic Usage
+
+Kill a process running on port 8080 (default):
 ```shell
-jeka base: runJar programArgs="" jvmOptions=""
+kill8
 ```
 
-Run jar 
-This will directly run the built application, without checking if sources have changed since last run
-```
-jeka -p
+Kill a process running on a specific port:
+```shell
+kill8 <port-number>
 ```
 
-### Docker
-
-Create image:
+Example:
 ```shell
-jeka docker: build
-```
-Show info about image
-```shell
-jeka docker: info
-```
-
-Create native image:
-```shell
-jeka docker: buildNative
-```
-Show info about native image:
-```shell
-jeka docker: infoNative
+kill8 3000
 ```
