@@ -7,6 +7,21 @@ public class LinuxProcKiller implements ProcKiller {
 
     @Override
     public void kill(int port) throws Exception {
+
+        // Check lsof is installed
+        ProcessBuilder checkLsof = new ProcessBuilder("which", "lsof");
+        Process process = checkLsof.start();
+
+        BufferedReader whichReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String lsofPath = whichReader.readLine();
+        whichReader.close();
+
+        int lsofExitCode = process.waitFor();
+
+        if (lsofExitCode != 0 || lsofPath == null || lsofPath.trim().isEmpty()) {
+            throw new Exception("lsof is not installed on this system. Please install lsof to use this functionality.");
+        }
+
         // Find the process ID using the port
         Process findProcess = Runtime.getRuntime().exec(
                 new String[]{"bash", "-c", "lsof -ti tcp:" + port}
