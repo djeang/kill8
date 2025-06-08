@@ -14,7 +14,8 @@ class MacosProcKiller implements ProcKiller {
 
         // If no process found
         if (pid == null || pid.trim().isEmpty()) {
-            System.err.println("No process found running on port " + port);
+            System.err.printf("No process found running on port %s. Run 'kill8 <port>' to kill process on another port."
+                    , port);
             return;
         }
 
