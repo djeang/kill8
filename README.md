@@ -10,12 +10,12 @@ t works across different operating systems (macOS, Linux, and Windows) using the
 # Install
 
 ```shell
-jeka app: install repo=https://github.com/djeang/kill8.git
+jeka app: install repo=djeang/kill8
 ```
 
 Or install the native version:
 ```shell
-jeka app: install repo=https://github.com/djeang/kill8.git native:
+jeka app: install repo=djeang/kill8 native:
 ```
 
 ## Usage
