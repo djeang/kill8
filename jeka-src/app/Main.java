@@ -73,5 +73,4 @@ public class Main {
         System.out.println("Supported platforms: macOS, Linux, Windows");
     }
 
-
 }

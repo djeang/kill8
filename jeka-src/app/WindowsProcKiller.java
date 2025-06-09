@@ -5,7 +5,8 @@ import java.io.InputStreamReader;
 
 class WindowsProcKiller implements ProcKiller {
 
-    public void kill(int port) throws Exception {
+    @Override
+    public String pid(int port) throws Exception {
         // Find the process ID using the port
         Process findProcess = Runtime.getRuntime().exec(
                 new String[]{"cmd", "/c", "netstat", "-ano", "|", "findstr", ":" + port}
@@ -24,24 +25,14 @@ class WindowsProcKiller implements ProcKiller {
             }
         }
         reader.close();
+        return pid;
+    }
 
-        // If no process found
-        if (pid == null || pid.trim().isEmpty()) {
-            System.err.println("No process found running on port " + port);
-            return;
-        }
-
-        // Kill the process using taskkill
+    @Override
+    public int killPid(String pid) throws Exception {
         Process killProcess = Runtime.getRuntime().exec(
                 new String[]{"cmd", "/c", "taskkill", "/PID", pid, "/F"}
         );
-
-        int exitCode = killProcess.waitFor();
-
-        if (exitCode == 0) {
-            System.err.println("Process on port " + port + " killed successfully (PID: " + pid + ")");
-        } else {
-            System.err.println("Failed to kill process on port " + port);
-        }
+        return killProcess.waitFor();
     }
 }

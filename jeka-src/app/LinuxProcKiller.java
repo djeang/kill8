@@ -6,8 +6,7 @@ import java.io.InputStreamReader;
 public class LinuxProcKiller implements ProcKiller {
 
     @Override
-    public void kill(int port) throws Exception {
-
+    public String pid(int port) throws Exception {
         // Check lsof is installed
         ProcessBuilder checkLsof = new ProcessBuilder("which", "lsof");
         Process process = checkLsof.start();
@@ -30,24 +29,15 @@ public class LinuxProcKiller implements ProcKiller {
         BufferedReader reader = new BufferedReader(new InputStreamReader(findProcess.getInputStream()));
         String pid = reader.readLine();
         reader.close();
+        return pid;
+    }
 
-        // If no process found
-        if (pid == null || pid.trim().isEmpty()) {
-            System.err.println("No process found running on port " + port);
-            return;
-        }
-
-        // Kill the process
+    @Override
+    public int killPid(String pid) throws Exception {
         Process killProcess = Runtime.getRuntime().exec(
                 new String[]{"bash", "-c", "kill -9 " + pid}
         );
-
-        int exitCode = killProcess.waitFor();
-
-        if (exitCode == 0) {
-            System.err.println("Process on port " + port + " killed successfully (PID: " + pid + ")");
-        } else {
-            System.err.println("Failed to kill process on port " + port);
-        }
+        return killProcess.waitFor();
     }
+
 }
